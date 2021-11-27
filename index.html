@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IldenH</title>
+    <style type="text/css">
+        .IldenH {
+            background-color: red;
+            width: 80vmin;
+            height: 80vmin;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .IldenH2 {
+            width: 80vmin;
+            /* height: 80vmin; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .eyes {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            /* width: 70vmin; */
+            height: 10vmin;
+        }
+
+        .eye {
+            height: 10vmin;
+            width: 10vmin;
+            background-color: black;
+        }
+
+        .mouth {
+            /* width: 60vmin; */
+            height: 10vmin;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="IldenH">
+        <div class="IldenH2" style="height:50vmin;">
+            <div class="eyes" style="width:70vmin;">
+                <div class="eye"></div>
+                <div class="eye"></div>
+            </div>
+            <div class="mouth" style="width:60vmin;"></div>
+        </div>
+    </div>
+
+    <label for="eyesInput">Eyes Input</label>
+    <input type="range" id="eyesInput" min="20" max="80" value="70" step="1">
+
+    <br />
+
+    <label for="mouthInput">Mouth Input</label>
+    <input type="range" id="mouthInput" min="20" max="80" value="60" step="1">
+
+    <br />
+
+    <label for="IldenHInput">IldenH Input</label>
+    <input type="range" id="IldenHInput" min="20" max="80" value="50" step="1">
+
+    <script src="https://cdn.jsdelivr.net/npm/umbrellajs"></script>
+    <script type="text/javascript">
+        u("#eyesInput").on("change", () => {
+            u(".eyes").attr("style", `width:${document.querySelector("#eyesInput").value}vmin;`);
+        });
+
+        u("#mouthInput").on("change", () => {
+            u(".mouth").attr("style", `width:${document.querySelector("#mouthInput").value}vmin;`);
+        });
+
+        u("#IldenHInput").on("change", () => {
+            u(".IldenH2").attr("style", `height:${document.querySelector("#IldenHInput").value}vmin;`);
+        });
+    </script>
+</body>
+
+</html>
