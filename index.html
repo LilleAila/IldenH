@@ -15,6 +15,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
 
         .IldenH2 {
@@ -50,6 +51,8 @@
 </head>
 
 <body>
+    <h3>Click IldenH to add image to document</h3>
+
     <div class="IldenH">
         <div class="IldenH2" style="height:50vmin;">
             <div class="eyes" style="width:70vmin;">
@@ -73,7 +76,10 @@
     <label for="IldenHInput">IldenH Input</label>
     <input type="range" id="IldenHInput" min="20" max="80" value="50" step="1">
 
+    <div class="images"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/umbrellajs"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script type="text/javascript">
         u("#eyesInput").on("change", () => {
             u(".eyes").attr("style", `width:${document.querySelector("#eyesInput").value}vmin;`);
@@ -86,6 +92,13 @@
         u("#IldenHInput").on("change", () => {
             u(".IldenH2").attr("style", `height:${document.querySelector("#IldenHInput").value}vmin;`);
         });
+
+        u(".IldenH").on("click", () => {
+            console.log("IldenH clicked");
+            html2canvas(document.querySelector(".IldenH")).then(canvas => {
+                u(".images").append(canvas)
+            });
+        })
     </script>
 </body>
 
