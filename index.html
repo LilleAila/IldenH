@@ -15,14 +15,14 @@
         }
 
         .IldenH {
-            background-color: red;
+            /* background-color: red; */
             width: 80vmin;
             height: 80vmin;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
+            /* cursor: pointer; */
         }
 
         .IldenH2 {
@@ -46,66 +46,99 @@
         .eye {
             height: 10vmin;
             width: 10vmin;
-            background-color: black;
+            /* background-color: black; */
         }
 
         .mouth {
             /* width: 60vmin; */
             height: 10vmin;
-            background-color: black;
+            /* background-color: black; */
         }
     </style>
 </head>
 
 <body>
-    <h3>Click IldenH to add image to document</h3>
-
-    <div class="IldenH">
+    <div class="IldenH" style="background-color:#ff0000">
         <div class="IldenH2" style="height:50vmin;">
             <div class="eyes" style="width:70vmin;">
-                <div class="eye"></div>
-                <div class="eye"></div>
+                <div class="eye" style="background-color:#000000;"></div>
+                <div class="eye" style="background-color:#000000;"></div>
             </div>
-            <div class="mouth" style="width:60vmin;"></div>
+            <div class="mouth" style="width:60vmin;background-color:#000000;"></div>
         </div>
     </div>
 
-    <label for="eyesInput">Eyes Input</label>
+    <label for="eyesInput">Eyes</label>
     <input type="range" id="eyesInput" min="20" max="80" value="70" step="1">
 
     <br />
 
-    <label for="mouthInput">Mouth Input</label>
+    <label for="mouthInput">Mouth</label>
     <input type="range" id="mouthInput" min="20" max="80" value="60" step="1">
 
     <br />
 
-    <label for="IldenHInput">IldenH Input</label>
+    <label for="IldenHInput">IldenH</label>
     <input type="range" id="IldenHInput" min="20" max="80" value="50" step="1">
+
+    <br />
+
+    <label for="backgroundInput">Background color</label>
+    <input type="color" value="#ff0000" id="backgroundColor">
+
+    <br />
+
+    <label for="IldenHColor">IldenH color</label>
+    <input type="color" value="#000000" id="IldenHColor">
+
+    <br />
+
+    <button class="IldenHImage">Get Image</button>
+
+    <br />
 
     <div class="images"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/umbrellajs"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/umbrellajs"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script type="text/javascript">
-        u("#eyesInput").on("change", () => {
-            u(".eyes").attr("style", `width:${document.querySelector("#eyesInput").value}vmin;`);
+        $("#eyesInput").change(() => {
+            //u(".eyes").attr("style", `width:${document.querySelector("#eyesInput").value}vmin;`);
+            $(".eyes").css("width", $("#eyesInput").val() + "vmin");
         });
 
-        u("#mouthInput").on("change", () => {
-            u(".mouth").attr("style", `width:${document.querySelector("#mouthInput").value}vmin;`);
+        $("#mouthInput").change(() => {
+            //u(".mouth").attr("style", `width:${document.querySelector("#mouthInput").value}vmin;`);
+            $(".mouth").css("width", $("#mouthInput").val() + "vmin");
         });
 
-        u("#IldenHInput").on("change", () => {
-            u(".IldenH2").attr("style", `height:${document.querySelector("#IldenHInput").value}vmin;`);
+        $("#IldenHInput").change(() => {
+            //u(".IldenH2").attr("style", `height:${document.querySelector("#IldenHInput").value}vmin;`);
+            $(".IldenH2").css("height", $("#IldenHInput").val() + "vmin");
         });
 
-        u(".IldenH").on("click", () => {
-            console.log("IldenH clicked");
+        $("#backgroundColor").change(() => {
+            //u(".IldenH").attr("style", `background-color:${document.querySelector("#backgroundColor").value};`)
+            $(".IldenH").css("background-color", $("#backgroundColor").val());
+        });
+
+        $("#IldenHColor").change(() => {
+            //u(".eye").attr("style", `background-color:${document.querySelector("#IldenHColor").value};`);
+            //u(".mouth").attr("style", `background-color:${document.querySelector("#IldenHColor").value};`);
+            $(".eye, .mouth").css("background-color", $("#IldenHColor").val());
+        });
+
+        $(".IldenHImage").click(() => {
+            // console.log("IldenH clicked");
             html2canvas(document.querySelector(".IldenH")).then(canvas => {
-                u(".images").append(canvas)
+                //u(".images").append(canvas)
+                let imageElement = $("<img>")
+                    .attr("src", canvas.toDataURL("image/png"));
+                $(".images").append(imageElement);
             });
-        })
+        });
     </script>
 </body>
 
